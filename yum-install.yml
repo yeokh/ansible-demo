@@ -13,3 +13,11 @@
         state: latest
         exclude: kernel*,foo*
       become: true
+
+    - name: verify installation
+      shell: /usr/bin/nano -V
+      register: cmd_result
+      
+    - fail:
+        msg: 'nano installation failed'
+      when: "'GNU nano' not in cmd_result.content"
