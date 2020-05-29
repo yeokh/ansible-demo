@@ -26,6 +26,6 @@
       
     - fail:
         msg: 'nano installation failed'
-      when: '"GNE" not in cmd_result'
+      when: '"GNU" not in cmd_result'
       check_mode: no
       
