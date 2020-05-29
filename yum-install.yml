@@ -15,7 +15,8 @@
       become: true
 
     - name: verify installation
-      shell: /usr/bin/nano -V || grep GNU
+      shell: /usr/bin/nano -V | grep GNU
+      ignore_errors: yes
       register: cmd_result
       
     - fail:
