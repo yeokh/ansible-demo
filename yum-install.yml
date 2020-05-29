@@ -15,9 +15,9 @@
       become: true
 
     - name: verify installation
-      shell: /usr/bin/nano -V
+      shell: /usr/bin/nano -V || grep GNU
       register: cmd_result
       
     - fail:
         msg: 'nano installation failed'
-      when: "'GNU nano' not in cmd_result.content"
+      when: "'GNU' not in cmd_result.content"
