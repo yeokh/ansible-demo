@@ -1,0 +1,8 @@
+- name: Yum UnInstall
+  hosts: all
+  tasks:
+    - name: Un-install one specific version of nano
+      yum:
+        name: nano
+        state: absent
+      become: true
