@@ -14,6 +14,5 @@
         demo_message: "Hello World!"
       debug:
         msg:
-          - "Host Facts:"
-          - "{{ inventory_hostname }} - Hello World! {{ demo_message }}"
+          - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
