@@ -15,10 +15,16 @@
       become: true
 
     - name: verify installation
-      shell: /usr/bin/nano -V | grep GNU
+      shell: /usr/bin/nano -V | grep 'GNU'
+      # grep will exit with 1 when no results found and halt play. Set to ignore.   
       ignore_errors: yes
       register: cmd_result
+      check_mode: no
+      
+    - debug:
+        msg: "{{ cmd_result }}"
       
     - fail:
         msg: 'nano installation failed'
-      when: "'GNU' not in cmd_result.content"
+      when: cmd_result != "GNU"
+      
