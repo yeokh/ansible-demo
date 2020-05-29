@@ -1,7 +1,7 @@
 - name: Hello World Sample
   hosts: all
   tasks:
-  # Pause for x minutes to build app cache.
+  # Pause for x minutes
     - name: Pause for x minute before running the tasks
       pause:
         minutes: 0
@@ -11,8 +11,9 @@
         hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
         hostMemTotal: "{{ hostvars[inventory_hostname].ansible_memtotal_mb }}"
         hostMemFree: "{{ hostvars[inventory_hostname].ansible_memfree_mb }}"
+        demo_message: "Hello World!"
       debug:
-        msg: 
+        msg:
+          - "Host Facts:"
           - "{{ inventory_hostname }} - Hello World! {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
-          
