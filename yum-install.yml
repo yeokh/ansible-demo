@@ -1,0 +1,15 @@
+- name: Yum Install
+  hosts: all
+  tasks:
+    - name: install one specific version of nano
+      yum:
+        name: nano
+        state: present
+      become: true
+
+    - name: upgrade packages, exclude kernel & foo related packages
+      yum:
+        name: 'nano*'
+        state: latest
+        exclude: kernel*,foo*
+      become: true
