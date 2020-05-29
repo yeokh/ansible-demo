@@ -22,10 +22,10 @@
       check_mode: no
       
     - debug:
-        msg: "{{ cmd_result }}"
+        msg: "Command Result: {{ cmd_result }}"
       
     - fail:
         msg: 'nano installation failed'
-      when: '"GNU" not in cmd_result'
+      when: not cmd_result is search("GNU")
       check_mode: no
       
