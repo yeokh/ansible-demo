@@ -1,0 +1,16 @@
+- name: Yum Update Security
+  hosts: all
+  tasks:
+    - name: list security updates
+      yum:
+        list: security
+      register: sec_list
+
+    - debug:
+        msg: "Secuiry List: {{ sec_list }}"
+        
+    - name: install security updates
+      yum:
+        name: 'nano*'
+        security: yes
+        state: latest
