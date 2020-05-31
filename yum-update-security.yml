@@ -8,9 +8,14 @@
 
     - debug:
         msg: "Secuiry List: {{ sec_list }}"
-        
+    
+    # https://docs.ansible.com/ansible/latest/modules/yum_module.html
+    # https://access.redhat.com/solutions/10021
+    # State: 
+    #   present or installed - Ensure that a desired package is installed
+    #   latest - Update the specified package if it's not of the latest available version
     - name: install security updates
       yum:
         name: 'nano*'
         security: yes
-        state: latest
+        state: present
