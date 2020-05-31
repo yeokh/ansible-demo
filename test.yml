@@ -1,0 +1,11 @@
+
+- name: Testing Playbook
+  hosts: all
+  tasks:
+    - name: Print Variables
+      vars:
+        demo_message: "Hello World! {{ survey_var1 }}"
+
+      debug:
+        msg:
+          - "demo_message: {{ demo_message }}"
