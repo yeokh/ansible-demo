@@ -1,0 +1,11 @@
+# External roles and their sources to be import by ansible-galaxy
+#
+# from GitHub
+- src: https://github.com/bennojoy/nginx 
+
+# from GitHub, overriding the name and specifying a tag 
+- src: https://github.com/bennojoy/nginx 
+  version: master 
+  name: nginx_role
+
+# ... any other roles to be imported.
