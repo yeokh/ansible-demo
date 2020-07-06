@@ -21,7 +21,7 @@
       register: cmd_result
       check_mode: no
 
-    - name: Reboot the machine an wait for it to startup
+    - name: Reboot the server and wait for 600 sec 
       reboot:
         reboot_timeout: 600
         
