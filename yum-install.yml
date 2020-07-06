@@ -21,10 +21,10 @@
       register: cmd_result
       check_mode: no
 
-    - name: Reboot the machine an wait for it to startup 
+    - name: Reboot the machine an wait for it to startup
       reboot:
         reboot_timeout: 600
-
+        
     - debug:
         msg: "Command Result: {{ cmd_result }}"
       
