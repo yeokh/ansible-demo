@@ -16,7 +16,7 @@
         hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
         hostMemTotal: "{{ hostvars[inventory_hostname].ansible_memtotal_mb }}"
         hostMemFree: "{{ hostvars[inventory_hostname].ansible_memfree_mb }}"
-        customFact01: "{{ hostvars[inventory_hostname].ansible_local.custom_fact01 }}"
+        customFact01: "{{ hostvars[inventory_hostname].ansible_local.custom_fact01.var01 }}"
         demo_message: "Hello World!"
       debug:
         msg:
