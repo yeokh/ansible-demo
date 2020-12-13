@@ -16,7 +16,7 @@
         hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
         hostMemTotal: "{{ hostvars[inventory_hostname].ansible_memtotal_mb }}"
         hostMemFree: "{{ hostvars[inventory_hostname].ansible_memfree_mb }}"
-        customFact01: "{{ hostvars[inventory_hostname].ansible_local.* }}"
+        customFact01: "{{ hostvars[inventory_hostname].ansible_local.custom_fact01 }}"
         demo_message: "Hello World!"
       debug:
         msg:
@@ -39,7 +39,7 @@
 
     - name: Create a static custom fact
       copy:
-        content: '"customfact01": { "var01" : "123", "var02"  : "abc" }"'
+        content: '"custom_fact01": { "var01" : "123", "var02"  : "abc" }"'
         dest: /etc/ansible/facts.d/custom_fact01.fact
 
 # NOT WORKING
