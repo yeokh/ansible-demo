@@ -28,9 +28,9 @@
   # To use it in the same play where you created it, you must explicitly re-run the setup module.
   # Get/Set Custom Facts  
   # ====================
-- name: Hello World Sample
-  hosts: all
-  become: true
+#- name: Hello World Sample
+#  hosts: all
+#  become: true
   
     - name: Create directory for ansible custom facts
       ansible.builtin.file:
