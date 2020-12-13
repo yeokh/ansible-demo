@@ -41,10 +41,11 @@
         content: '"customfact01": { "var01" : "123", "var02"  : "abc" }"'
         dest: /etc/ansible/facts.d/custom_fact01.fact
 
-    - name: "Re-run setup to use custom facts"
-      setup: ~
-      vars:
-        customFact01: "{{ hostvars[inventory_hostname].ansible_local.* }}"
-      debug:
-        msg: 
-          - "Custom Facts: {{ customFact01 }}"
+# NOT WORKING
+#    - name: "Re-run setup to use custom facts"
+#      setup: ~
+#      vars:
+#        customFact01: "{{ hostvars[inventory_hostname].ansible_local.* }}"
+#      debug:
+#        msg: 
+#          - "Custom Facts: {{ customFact01 }}"
