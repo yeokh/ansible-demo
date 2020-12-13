@@ -10,7 +10,7 @@
   #
   # Display message with host information
   # =====================================
-    - name: Hello Message
+    - name: Hello Message 
       vars:
         hostOS: "{{ hostvars[inventory_hostname].ansible_distribution }}"
         hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
@@ -21,6 +21,7 @@
         msg:
           - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
+          - "13-Dec-2020 Run 1"
 
   #
   # Custom fact created using facts.d will be available in next play that gathers facts. 
