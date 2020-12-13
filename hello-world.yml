@@ -2,9 +2,13 @@
   hosts: all
   tasks:
   # Pause for x minutes
+  # ===================
     - name: Pause for x minute before running the tasks
       pause:
         minutes: 0
+  #
+  # Display message with host information
+  # =====================================
     - name: Hello Message
       vars:
         hostOS: "{{ hostvars[inventory_hostname].ansible_distribution }}"
@@ -16,3 +20,21 @@
         msg:
           - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
+  #
+  # Get/Set Custom Facts
+  # ====================
+    - name: Create directory for ansible custom facts
+      ansible.builtin.file:
+        state: directory
+        recurse: yes
+        path: /etc/ansible/facts.d
+
+    - name: Install custom ipmi fact
+    - name: Create a static custom fact
+      copy:
+        content: '"content of custom fact01"'
+        dest: /etc/ansible/facts.d/custom_fact01.fact
+
+    - name: Re-read facts after adding custom fact
+      ansible.builtin.setup:
+        filter: ansible_local
