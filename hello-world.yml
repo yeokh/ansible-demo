@@ -21,7 +21,9 @@
           - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
   #
-  # Get/Set Custom Facts
+  # Custom fact created using facts.d will be available in next play that gathers facts. 
+  # To use it in the same play where you created it, you must explicitly re-run the setup module.
+  # Get/Set Custom Facts  
   # ====================
     - name: Create directory for ansible custom facts
       ansible.builtin.file:
@@ -29,7 +31,6 @@
         recurse: yes
         path: /etc/ansible/facts.d
 
-    - name: Install custom ipmi fact
     - name: Create a static custom fact
       copy:
         content: '"customfact01": { "var01" : "123", "var02"  : "abc" }"'
@@ -38,3 +39,8 @@
     - name: Re-read facts after adding custom fact
       ansible.builtin.setup:
         filter: ansible_local
+      vars:
+        customFact01: "{{ test }}"
+      debug:
+        msg: 
+          - "Custom Facts: {{ customFact01 }}"
