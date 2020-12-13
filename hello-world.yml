@@ -16,13 +16,13 @@
         hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
         hostMemTotal: "{{ hostvars[inventory_hostname].ansible_memtotal_mb }}"
         hostMemFree: "{{ hostvars[inventory_hostname].ansible_memfree_mb }}"
-        customFact01: "{{ hostvars[inventory_hostname].ansible_local.custom_fact01.var01 }}"
+# Error loading custom fact        customFact01: "{{ hostvars[inventory_hostname].ansible_local.custom_fact01.var01 }}"
         demo_message: "Hello World!"
       debug:
         msg:
           - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
-          - "Custom Facts: {{ customFact01 }}"
+#          - "Custom Facts: {{ customFact01 }}"
           - "13-Dec-2020 Run 1"
 
   #
