@@ -1,5 +1,7 @@
 - name: Hello World Sample
   hosts: all
+  become: true
+  
   tasks:
   # Pause for x minutes
   # ===================
