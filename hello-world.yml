@@ -32,7 +32,7 @@
     - name: Install custom ipmi fact
     - name: Create a static custom fact
       copy:
-        content: '"content of custom fact01"'
+        content: '"customfact01": { "var01" : "123", "var02"  : "abc" }"'
         dest: /etc/ansible/facts.d/custom_fact01.fact
 
     - name: Re-read facts after adding custom fact
