@@ -16,6 +16,7 @@
         hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
         hostMemTotal: "{{ hostvars[inventory_hostname].ansible_memtotal_mb }}"
         hostMemFree: "{{ hostvars[inventory_hostname].ansible_memfree_mb }}"
+        customFact01: "{{ hostvars[inventory_hostname].ansible_local.* }}"
         demo_message: "Hello World!"
       debug:
         msg:
@@ -28,9 +29,6 @@
   # To use it in the same play where you created it, you must explicitly re-run the setup module.
   # Get/Set Custom Facts  
   # ====================
-#- name: Hello World Sample
-#  hosts: all
-#  become: true
   
     - name: Create directory for ansible custom facts
       ansible.builtin.file:
@@ -43,11 +41,10 @@
         content: '"customfact01": { "var01" : "123", "var02"  : "abc" }"'
         dest: /etc/ansible/facts.d/custom_fact01.fact
 
-#    - name: Re-read facts after adding custom fact
-#      ansible.builtin.setup:
-#        filter: ansible_local
-#      vars:
-#        customFact01: "{{ test }}"
-#      debug:
-#        msg: 
-#          - "Custom Facts: {{ customFact01 }}"
+    - name: "Re-run setup to use custom facts"
+      setup: ~
+      vars:
+        customFact01: "{{ hostvars[inventory_hostname].ansible_local.* }}"
+      debug:
+        msg: 
+          - "Custom Facts: {{ customFact01 }}"
