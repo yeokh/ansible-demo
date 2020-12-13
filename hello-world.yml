@@ -22,6 +22,7 @@
         msg:
           - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
+          - "Custom Facts: {{ customFact01 }}"
           - "13-Dec-2020 Run 1"
 
   #
