@@ -43,11 +43,11 @@
         content: '"customfact01": { "var01" : "123", "var02"  : "abc" }"'
         dest: /etc/ansible/facts.d/custom_fact01.fact
 
-    - name: Re-read facts after adding custom fact
-      ansible.builtin.setup:
-        filter: ansible_local
-      vars:
-        customFact01: "{{ test }}"
-      debug:
-        msg: 
-          - "Custom Facts: {{ customFact01 }}"
+#    - name: Re-read facts after adding custom fact
+#      ansible.builtin.setup:
+#        filter: ansible_local
+#      vars:
+#        customFact01: "{{ test }}"
+#      debug:
+#        msg: 
+#          - "Custom Facts: {{ customFact01 }}"
