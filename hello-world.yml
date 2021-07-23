@@ -36,6 +36,22 @@
         recurse: yes
         path: /etc/ansible/facts.d
 
+    - name: Insert/Update "Match User" configuration block in /etc/ssh/sshd_config  
+      blockinfile:
+        path: /etc/ansible/facts.d/custom03.fact
+        mode: 0664
+        block: |
+          {
+            "packages": {
+              "web_package": "httpd",
+              "db_package": "mariadb-server"
+            },
+            "users": {
+              "user1": "joe",
+              "user2": "jane"
+            }
+          }          
+
 #    - name: Create a static custom fact
 #      copy:
 #        content: '{"custom01" : "Custom fact 01"}'
