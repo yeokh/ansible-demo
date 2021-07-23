@@ -36,11 +36,11 @@
         recurse: yes
         path: /etc/ansible/facts.d
 
-    - name: Create a static custom fact
-      copy:
-        content: '{"custom01" : "Custom fact 01"}'
-        dest: /etc/ansible/facts.d/custom_fact01.fact
-        mode: 0755
+#    - name: Create a static custom fact
+#      copy:
+#        content: '{"custom01" : "Custom fact 01"}'
+#        dest: /etc/ansible/facts.d/custom_fact01.fact
+#        mode: 0755
         
 #    - name: "Re-run setup to use custom facts"
 #      setup: ~
