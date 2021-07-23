@@ -62,16 +62,22 @@
             }
           }          
 
-# ansible localhost -m setup | grep custom -A 5
-        
+#
+# ansible localhost -m setup | grep custom -A 5 
+# ansible localhost -m ansible.builtin.setup -a "filter=ansible_local"
+#        
     - name: "Re-run setup to use custom facts"
       setup: ~
 
-# TESTING
-#    - name: "Re-run setup to use custom facts"
-#      setup: ~
-#      vars:
-#        customFact01: "{{ hostvars[inventory_hostname].ansible_local.* }}"
-#      debug:
-#        msg: 
-#          - "Custom Facts: {{ customFact01 }}"
+# Get custom facts
+# =====================================
+    - name: Custom Facts 
+      vars:
+        customFactUser1: "{{ hostvars[inventory_hostname].ansible_local.custom01.users.user1 }}"
+        customFactUsers: "{{ hostvars[inventory_hostname].ansible_local.custom01.users }}"
+      debug:
+        msg:
+          - "Custom facts: {{ customFactUsers }} - {{ customFactUser1 }}"
+
+
+
