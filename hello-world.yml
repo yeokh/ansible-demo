@@ -35,11 +35,16 @@
         state: directory
         recurse: yes
         path: /etc/ansible/facts.d
+              
+    - name: Create a new file with permissions
+      file:
+        path: "/etc/ansible/facts.d/custom03.fact"
+        state: touch
+        mode: 0664
 
-    - name: Insert/Update "Match User" configuration block in /etc/ssh/sshd_config  
+    - name: Insert block of configuration custom information  
       blockinfile:
         path: /etc/ansible/facts.d/custom03.fact
-        mode: 0664
         block: |
           {
             "packages": {
