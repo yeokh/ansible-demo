@@ -42,7 +42,7 @@
         content: '"custom_fact01": { "var01" : "123", "var02"  : "abc" }"'
         dest: /etc/ansible/facts.d/custom_fact01.fact
 
-# NOT WORKING
+# TESTING
 #    - name: "Re-run setup to use custom facts"
 #      setup: ~
 #      vars:
