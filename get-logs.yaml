@@ -1,0 +1,16 @@
+- name: Gather log files from remote systems
+  hosts: web, app
+
+  tasks:
+    - name: Find logs
+      find:
+        paths: /var/log/
+        patterns: '*.log'
+        recurse: yes
+      register: _logs
+
+    - name: Fetch logs
+      fetch:
+        src: "{{ item.path }}"
+        dest: logs
+      with_items: "{{ _logs.files }}"
