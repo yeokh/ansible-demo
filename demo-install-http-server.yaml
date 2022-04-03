@@ -9,10 +9,21 @@
       name: httpd
       state: latest
 
-  - name: latest index.html file is present
-    template:
-      src: files/index.html
-      dest: /var/www/html/
+#  - name: latest index.html file is present
+#    template:
+#      src: files/index.html
+#      dest: /var/www/html/
+      
+  - name: Insert/Update HTML surrounded by custom markers after <body> line
+    blockinfile:
+      path: /var/www/html/index.html
+      marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+      create: yes
+      block: |
+        <body>
+        <h1>Welcome to {{ ansible_hostname }}</h1>
+        <p>Last updated on {{ ansible_date_time.iso8601 }}</p>
+        </body>
 
   - name: httpd is started
     service:
