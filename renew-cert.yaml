@@ -1,0 +1,27 @@
+---
+- hosts: all
+  vars:
+    email: "admin@email"
+    domains:
+      - { domain: 'domain.tld' }
+      - { domain: 'domain2', altnames: ['test.domain2', 'www.domain2'], auto_www: false }
+      - { domain: 'domain3', altnames: ['domain4'] }
+      - { domain: 'domain5', email: 'otheradmin@domain5' }
+  tasks:
+    - name: Check certificate date
+      stat: path=/etc/letsencrypt/live/{{ item.domain }}/fullchain.pem
+      register: mtimes
+      with_items: domains
+    - name: Request new certificate
+      command: "letsencrypt certonly --webroot --webroot-path /var/www/letsencrypt --email {{ item.item.email|default(email)|quote }} -d {{ item.item.domain|quote }}{% if item.item.auto_www|default(true) %} -d www.{{ item.item.domain|quote }}{% endif %}{% for altname in item.item.altnames|default([]) %} -d {{ altname|quote }}{% if item.item.auto_www|default(true) %} -d www.{{ altname|quote }}{% endif %}{% endfor %}"
+      when: ansible_date_time.epoch|float - item.stat.mtime > 60*60*24*30
+      register: output
+      with_items: mtimes.results
+      notify: Reload Nginx
+    - name: Debug
+      debug: var=item.stdout
+      debug: var=item.stderr
+      with_items: output.results
+  handlers:
+    - name: Reload Nginx
+      service: name=nginx state=reloaded
