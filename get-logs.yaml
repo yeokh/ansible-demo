@@ -1,5 +1,5 @@
 - name: Gather log files from remote systems
-  hosts: web, app
+  hosts: web:app
 
   tasks:
     - name: Find logs
