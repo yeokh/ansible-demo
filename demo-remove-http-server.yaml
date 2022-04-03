@@ -1,0 +1,22 @@
+---
+- name: stop and remove apache
+  hosts: web
+  become: yes
+
+  tasks:
+  
+  - name: httpd is stopped
+    service:
+      name: httpd
+      state: stopped
+      
+  - name: httpd package is absent
+    yum:
+      name: httpd
+      state: absent
+
+  - name: remove/delete index.html file
+    file:
+      path: /var/www/html/index.html
+      state: absent
+
