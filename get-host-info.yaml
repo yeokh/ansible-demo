@@ -1,0 +1,25 @@
+- name: Get host information
+  hosts: all
+  
+  tasks: 
+  #
+  # Display message with host information
+  # =====================================
+    - name: Hello Message 
+      vars:
+        hostOS: "{{ hostvars[inventory_hostname].ansible_distribution }}"
+        hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
+        hostMemTotal: "{{ hostvars[inventory_hostname].ansible_memtotal_mb }}"
+        hostMemFree: "{{ hostvars[inventory_hostname].ansible_memfree_mb }}"
+        demo_message: "Hello World!"
+      debug:
+        msg:
+          - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
+          - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
+          - "23-July-2021 Run 1"
+
+    - name: Get os kernel version release 
+      command: uname -osr
+      register: oskernelrelease
+
+  #
