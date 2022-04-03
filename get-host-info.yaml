@@ -5,7 +5,11 @@
   #
   # Display message with host information
   # =====================================
-    - name: Hello Message 
+    - name: Get os kernel version release 
+      command: uname -osr
+      register: oskernelrelease
+
+    - name: Display host information
       vars:
         hostOS: "{{ hostvars[inventory_hostname].ansible_distribution }}"
         hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
@@ -16,10 +20,7 @@
         msg:
           - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
+          - "kernel: {{ oskernelrelease }}"
           - "23-July-2021 Run 1"
-
-    - name: Get os kernel version release 
-      command: uname -osr
-      register: oskernelrelease
 
   #
