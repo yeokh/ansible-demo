@@ -20,7 +20,7 @@
         msg:
           - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
-          - "kernel: {{ oskernelrelease }}"
-          - "23-July-2021 Run 1"
+          - "kernel: {{ oskernelrelease.stdout_lines }}"
+          
 
   #
