@@ -1,0 +1,13 @@
+- name: Place holder for creating service request ticket
+  
+  tasks: 
+  #
+  # Create service ticket request
+  # =============================
+    - name: Create service ticket request 
+      vars:
+        var1: "Var 1"
+        var2: "Var 2" 
+      debug:
+        msg:
+          - "Service Ticket: {{ var1 }} - {{ var2 }}"
