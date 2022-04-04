@@ -27,7 +27,7 @@
           - "Demo Message: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
           - "kernel: {{ oskernelrelease.stdout_lines }}"
-          - "http server: {{ httpdcheck }}"
+          - "http server check: {{ httpdcheck }}"
           
 
   #
