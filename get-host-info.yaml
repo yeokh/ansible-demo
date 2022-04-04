@@ -12,8 +12,7 @@
 
     - name: Check httpd installation  
       yum:
-        name: httpd
-        list: installed
+        list: httpd
       register: httpdcheck
 
     - name: Display host information
