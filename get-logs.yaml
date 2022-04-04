@@ -1,4 +1,5 @@
 - name: Gather log files from remote systems
+  hosts: all
   tasks:
     - name: Find logs
       find:
