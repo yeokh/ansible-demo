@@ -1,5 +1,5 @@
 - name: Place holder for creating service request ticket
-  
+  hosts: all
   tasks: 
   #
   # Create service ticket request
