@@ -8,6 +8,10 @@
       command: uname -osr
       register: oskernelrelease
 
+    - name: Check httpd installation  
+      command: yum list --installed httpd
+      register: httpdcheck
+
     - name: Display host information
       vars:
         hostOS: "{{ hostvars[inventory_hostname].ansible_distribution }}"
@@ -20,6 +24,7 @@
           - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
           - "kernel: {{ oskernelrelease.stdout_lines }}"
+          - "http server: {{ httpdcheck }}"
           
 
   #
