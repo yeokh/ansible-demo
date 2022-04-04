@@ -21,10 +21,10 @@
         hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
         hostMemTotal: "{{ hostvars[inventory_hostname].ansible_memtotal_mb }}"
         hostMemFree: "{{ hostvars[inventory_hostname].ansible_memfree_mb }}"
-        demo_message: "Hello World!"
+        demo_message: "... inventory host name"
       debug:
         msg:
-          - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
+          - "Demo Message: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
           - "kernel: {{ oskernelrelease.stdout_lines }}"
           - "http server: {{ httpdcheck }}"
