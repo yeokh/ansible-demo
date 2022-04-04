@@ -1,5 +1,7 @@
 - name: Get host information
   hosts: all  
+  become: yes
+  
   tasks: 
   #
   # Display message with host information
