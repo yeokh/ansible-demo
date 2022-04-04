@@ -27,7 +27,6 @@
       notify: Reload Nginx
     - name: Debug
       debug: var=item.stdout
-      debug: var=item.stderr
       with_items: output.results
       
   handlers:
