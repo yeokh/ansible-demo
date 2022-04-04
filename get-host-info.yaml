@@ -1,5 +1,4 @@
 - name: Get host information
-  hosts: all
   
   tasks: 
   #
