@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Renew certs using Lets Encrypt
+  hosts: all
   vars:
     email: "admin@email"
     domains:
@@ -7,12 +8,18 @@
       - { domain: 'domain2', altnames: ['test.domain2', 'www.domain2'], auto_www: false }
       - { domain: 'domain3', altnames: ['domain4'] }
       - { domain: 'domain5', email: 'otheradmin@domain5' }
+
+# Get secret from HashiCorp Vault
+# https://docs.ansible.com/ansible/2.9/plugins/lookup/hashi_vault.html
+    vaultsecret: "{{ lookup('hashi_vault', 'secret=secret/hola:value token=c975b780-d1be-8016-866b-01d0f9b688a5 url=https://myvault:8200 validate_certs=False')}}"
+
   tasks:
     - name: Check certificate date
       stat: path=/etc/letsencrypt/live/{{ item.domain }}/fullchain.pem
       register: mtimes
       with_items: domains
-    - name: Request new certificate
+
+    - name: Request new certificate  
       command: "letsencrypt certonly --webroot --webroot-path /var/www/letsencrypt --email {{ item.item.email|default(email)|quote }} -d {{ item.item.domain|quote }}{% if item.item.auto_www|default(true) %} -d www.{{ item.item.domain|quote }}{% endif %}{% for altname in item.item.altnames|default([]) %} -d {{ altname|quote }}{% if item.item.auto_www|default(true) %} -d www.{{ altname|quote }}{% endif %}{% endfor %}"
       when: ansible_date_time.epoch|float - item.stat.mtime > 60*60*24*30
       register: output
@@ -22,6 +29,7 @@
       debug: var=item.stdout
       debug: var=item.stderr
       with_items: output.results
+      
   handlers:
     - name: Reload Nginx
       service: name=nginx state=reloaded
