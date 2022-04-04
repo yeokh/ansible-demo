@@ -9,7 +9,8 @@
       register: oskernelrelease
 
     - name: Check httpd installation  
-      command: yum list --installed httpd
+      yum:
+        list: httpd
       register: httpdcheck
 
     - name: Display host information
