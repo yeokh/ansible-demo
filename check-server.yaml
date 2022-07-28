@@ -1,0 +1,27 @@
+- name: Hello World Sample
+  hosts: all
+  
+  tasks:
+  # Pause for x minutes
+  # ===================
+    - name: Pause for x minute before running the tasks
+      pause:
+        minutes: 0
+  #
+  # Display message with host information
+  # Cannot display custom fact if not created yet.
+  # =====================================
+    - name: Hello Message 
+      vars:
+        hostOS: "{{ hostvars[inventory_hostname].ansible_distribution }}"
+        hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
+        hostMemTotal: "{{ hostvars[inventory_hostname].ansible_memtotal_mb }}"
+        hostMemFree: "{{ hostvars[inventory_hostname].ansible_memfree_mb }}"
+        demo_message: "Hello World!"
+      debug:
+        msg:
+          - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
+          - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
+          - "23-July-2021 Run 1"
+
+  
