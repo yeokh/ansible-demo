@@ -1,4 +1,4 @@
-- name: Hello World Sample
+- name: Simple Gather Facts from Hosts
   hosts: all
   
   tasks:
@@ -9,19 +9,18 @@
         minutes: 0
   #
   # Display message with host information
-  # Cannot display custom fact if not created yet.
   # =====================================
-    - name: Hello Message 
+    - name: Display Host Facts 
       vars:
         hostOS: "{{ hostvars[inventory_hostname].ansible_distribution }}"
         hostCores: "{{ hostvars[inventory_hostname].ansible_processor_cores }}"
         hostMemTotal: "{{ hostvars[inventory_hostname].ansible_memtotal_mb }}"
         hostMemFree: "{{ hostvars[inventory_hostname].ansible_memfree_mb }}"
-        demo_message: "Hello World!"
+        demo_message: "Display Host Information"
       debug:
         msg:
           - "Message from: {{ inventory_hostname }} - {{ demo_message }}"
           - "OS: {{ hostOS }}, Cores: {{ hostCores }}, Memory: {{ hostMemTotal }}, Free: {{ hostMemFree }}"
-          - "23-July-2021 Run 1"
+          - "28-July-2022 Run 1"
 
   
